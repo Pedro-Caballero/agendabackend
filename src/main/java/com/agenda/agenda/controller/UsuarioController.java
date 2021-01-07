@@ -41,7 +41,7 @@ public class UsuarioController {
         return new ResponseEntity(usuario, HttpStatus.OK);
     }
 
-    @PostMapping("create")
+    @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody UsuarioDto usuarioDto){
         if(usuarioService.existsByNombre(usuarioDto.getNombre()))
             return new ResponseEntity(new Mensaje("Ese nombre ya existe!!"), HttpStatus.BAD_REQUEST);
@@ -50,7 +50,7 @@ public class UsuarioController {
         return new ResponseEntity(new Mensaje("Usuario registrado"), HttpStatus.OK);
     }
 
-    @PutMapping("/update({id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id")int id, @RequestBody UsuarioDto usuarioDto){
         if (!usuarioService.existsById(id))
             return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
