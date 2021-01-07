@@ -43,8 +43,7 @@ public class UsuarioController {
 
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody UsuarioDto usuarioDto){
-        if(usuarioService.existsByNombre(usuarioDto.getNombre()))
-            return new ResponseEntity(new Mensaje("Ese nombre ya existe!!"), HttpStatus.BAD_REQUEST);
+
         Usuario usuario = new Usuario(usuarioDto.getNombre(), usuarioDto.getEmail(), usuarioDto.getTel());
         usuarioService.save(usuario);
         return new ResponseEntity(new Mensaje("Usuario registrado"), HttpStatus.OK);
@@ -54,12 +53,11 @@ public class UsuarioController {
     public ResponseEntity<?> update(@PathVariable("id")int id, @RequestBody UsuarioDto usuarioDto){
         if (!usuarioService.existsById(id))
             return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
-        if(usuarioService.existsByNombre(usuarioDto.getNombre()) && usuarioService.getByNombre(usuarioDto.getNombre()).get().getId() != id)
-            return new ResponseEntity(new Mensaje("Ese nombre ya existe!!"), HttpStatus.BAD_REQUEST);
+
         Usuario usuario = usuarioService.getOne(id).get();
         usuario.setNombre(usuarioDto.getNombre());
         usuario.setEmail(usuarioDto.getEmail());
-        usuario.setTel(usuario.getTel());
+        usuario.setTel(usuarioDto.getTel());
         usuarioService.save(usuario);
         return new ResponseEntity(new Mensaje("Usuario actualizado"), HttpStatus.OK);
     }

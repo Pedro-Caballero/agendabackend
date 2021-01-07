@@ -4,12 +4,12 @@ public class UsuarioDto {
 
     private String nombre;
     private String email;
-    private int tel;
+    private String tel;
 
     public UsuarioDto() {
     }
 
-    public UsuarioDto(String nombre, String email, int tel) {
+    public UsuarioDto(String nombre, String email, String tel) {
         this.nombre = nombre;
         this.email = email;
         this.tel = tel;
@@ -31,11 +31,11 @@ public class UsuarioDto {
         this.email = email;
     }
 
-    public int getTel() {
+    public String getTel() {
         return tel;
     }
 
-    public void setTel(int tel) {
+    public void setTel(String tel) {
         this.tel = tel;
     }
 }
